@@ -1,0 +1,64 @@
+<div class="card">
+    <div class="card-body">
+        <h3>Cadastro de Alunos</h3>
+        <br>
+        <form class='' action="cadastro_alunos/novo" method="POST" style="padding: 10px;">
+    <div class="form-floating mb-3">
+        <input id="floatingInput" class="form-control" type="text" name="nome" placeholder="Nome Completo" required>
+        <label for="floatingInput">Nome Completo</label>
+    </div>
+
+    <div class="form-floating">
+        <input id="floatingInput" class="form-control" type="tel" name="telefone" placeholder="(88) 9 9445-1045" required>
+        <label for="floatingInput">Telefone</label>
+    </div>
+    <br>
+    <div class="form-floating">
+    <select id="floatingInput" class="form-select" name="curso" required>
+        <option selected disabled>Selecione</option>
+        <option value="Avançado 1">Avançado 1</option>
+        <option value="Avançado 2">Avançado 2</option>
+        <option value="Avançado 3">Avançado 3</option>
+        <option value="Avançado Kids">Avançado Kids</option>
+        <option value="Avançado Personalizado">Avançado Personalizado</option>
+    </select>
+        <label for="floatingInput">Curso</label>
+    </div>
+    <br>
+    <div class="form-floating">
+        <input id="floatingInput" class="form-control" type="date" name="data_nascimento" placeholder="Data de Nascimento">
+        <label for="floatingInput">Data de Nascimento</label>
+    </div>
+    <br>
+    <div class="form-floating">
+         <select id="floatingInput" class="form-select" name="horario_curso" required>
+            <option selected disabled>Selecione</option>
+            <option value="07:00 às 09:00">07:00 às 09:00</option>
+            <option value="09:00 às 11:00">09:00 às 11:00</option>
+            <option value="11:00 às 13:00">11:00 às 13:00</option>
+            <option value="13:00 às 15:00">13:00 às 15:00</option>
+            <option value="15:00 às 17:00">15:00 às 17:00</option>
+            <option value="17:00 às 19:00">17:00 às 19:00</option>
+            <option value="19:00 às 21:00">19:00 às 21:00</option>
+       </select>
+        <label for="floatingInput">Horário do Curso</label>
+    </div>
+    <br>
+    <div class="form-floating">
+        <select id="floatingInput" class="form-select" name="dia_curso" required>
+            <option selected disabled>Selecione</option>
+            <option value="Segunda-Feira">Segunda-Feira</option>
+            <option value="Terça-Feira">Terça-Feira</option>
+            <option value="Quarta-Feira">Quarta-Feira</option>
+            <option value="Quinta-Feira">Quinta-Feira</option>
+            <option value="Sexta-Feira">Sexta-Feira</option>
+            <option value="Sábado">Sábado</option>
+       </select>
+        <label for="floatingInput">Dia do Curso</label>
+    </div>
+    <br>         
+    <button class="btn btn-success" type="submit">Salvar Cadastro</button>
+</form>
+
+    </div>
+</div>
