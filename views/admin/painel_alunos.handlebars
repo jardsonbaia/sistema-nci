@@ -1,0 +1,15 @@
+<h1>Painel Alunos</h1>
+<a href="/admin/cadastro_alunos">
+    <button class="btn btn-primary">Cadastrar Aluno</button>
+</a>
+
+{{#each alunos}}
+    <div class="card mt-2">
+        <div class="card-body">
+            <h4>{{nome}}</h4>
+            <h4>{{telefone}}</h4>
+        </div>
+    </div>
+{{else}}
+
+{{/each}}

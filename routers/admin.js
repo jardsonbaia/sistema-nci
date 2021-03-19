@@ -14,30 +14,63 @@ router.get('/cadastro_alunos', (req, res) => {
 })
 
 router.get('/painel_alunos', (req, res) => {
-    res.send('admin/painel_alunos')
+    Aluno.find().then((alunos) => {
+        res.render('admin/painel_alunos', {alunos: alunos})
+    }).catch((err) => {
+        req.flash('error_msg', 'Erro ao listar os alunos!')
+        res.redirect('/admin')
+    })
 })
 
 // Rota que recebe os dados do cadastro e salva no banco
 router.post('/cadastro_alunos/novo', (req, res) => {
-    // Cirando objeto com as informações da requisição POST
-    const novoAluno = {
-        nome: req.body.nome,
-        telefone: req.body.telefone,
-        curso: req.body.curso,
-        data_nascimento: req.body.data_nascimento,
-        horario_curso: req.body.horario_curso,
-        dia_curso: req.body.dia_curso
+
+    // Validação de dados que são enviado pra rota
+    let erros = []
+    if (!req.body.nome || typeof req.body.nome == undefined || req.body.nome == null || req.body.nome.length < 10) {
+        erros.push({ texto: "Nome inválido" })
     }
-    //Salvando objeto aluno no banco
-    new Aluno(novoAluno).save().then(() => {
-        console.log("Aluno Cadastrado com sucesso!")
-    }).catch((err) => {
-        console.log("Erro ao Cadastrar o Aluno!", err)
-    })
-    //Tela de Feddback
-    res.send(`Dados Salvos: ${novoAluno.nome} - ${novoAluno.telefone} - 
-    ${novoAluno.curso} - ${novoAluno.data_nascimento} - 
-    ${novoAluno.horario_curso} - ${novoAluno.dia_curso}`)
+    if (!req.body.telefone || typeof req.body.telefone == undefined || req.body.telefone == null || req.body.telefone.length < 11) {
+        erros.push({ texto: "Telefone inválido" })
+    }
+    if (!req.body.curso || typeof req.body.curso == undefined || req.body.curso == null) {
+        erros.push({ texto: "Curso inválido" })
+    }
+    if (!req.body.curso || typeof req.body.data_nascimento == undefined || req.body.data_nascimento == null || req.body.data_nascimento.length !== 10) {
+        erros.push({ texto: "Data de nascimento inválida" })
+    }
+    if (!req.body.horario_curso || typeof req.body.horario_curso == undefined || req.body.horario_curso == null) {
+        erros.push({ texto: "Horário do curso inválido" })
+    }
+    if (!req.body.dia_curso || typeof req.body.dia_curso == undefined || req.body.dia_curso == null) {
+        erros.push({ texto: "Dia do curso inválido" })
+    }
+    // Verificado se ocorreu erros
+    if (erros.length > 0) {
+        res.render("admin/cadastro_alunos", { erros: erros })
+    } else {
+
+        // Cirando objeto com as informações da requisição POST
+        const novoAluno = {
+            nome: req.body.nome,
+            telefone: req.body.telefone,
+            curso: req.body.curso,
+            data_nascimento: req.body.data_nascimento,
+            horario_curso: req.body.horario_curso,
+            dia_curso: req.body.dia_curso
+        }
+
+        //Salvando objeto aluno no banco
+        new Aluno(novoAluno).save().then(() => {
+            req.flash("success_msg", "Aluno Cadastrado com Sucesso!")
+            res.redirect('/admin/painel_alunos')
+        }).catch((err) => {
+            req.flash("error_msg", "Houve um erro ao cadastrar o aluno!")
+            res.redirect("/admin")
+        })
+    }
+
+
 })
 
 

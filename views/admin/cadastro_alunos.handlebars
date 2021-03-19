@@ -1,8 +1,13 @@
+{{#each erros}}
+    <div class="alert alert-danger">{{texto}}</div>
+{{else}}
+
+{{/each}}
 <div class="card">
     <div class="card-body">
         <h3>Cadastro de Alunos</h3>
         <br>
-        <form class='' action="cadastro_alunos/novo" method="POST" style="padding: 10px;">
+        <form class='' action="/admin/cadastro_alunos/novo" method="POST" style="padding: 10px;">
     <div class="form-floating mb-3">
         <input id="floatingInput" class="form-control" type="text" name="nome" placeholder="Nome Completo" required>
         <label for="floatingInput">Nome Completo</label>
@@ -45,7 +50,7 @@
     </div>
     <br>
     <div class="form-floating">
-        <select id="floatingInput" class="form-select" name="dia_curso" required>
+        <select id="floatingInput" class="form-select" name="dia_curso" required="true">
             <option selected disabled>Selecione</option>
             <option value="Segunda-Feira">Segunda-Feira</option>
             <option value="Terça-Feira">Terça-Feira</option>
@@ -59,6 +64,5 @@
     <br>         
     <button class="btn btn-success" type="submit">Salvar Cadastro</button>
 </form>
-
     </div>
 </div>

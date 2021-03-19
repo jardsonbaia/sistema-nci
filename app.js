@@ -4,14 +4,35 @@ const bodyparser = require('body-parser')
 const mongoose = require('mongoose')
 const admin = require ('./routers/admin')
 const path = require('path')
+const session = require('express-session')
+const flash = require('connect-flash')
 const port = 2222
 
 //Inicialização Express
 const app = express()
 
+// Conf Sessão
+app.use(session({
+    secret: "keynci",
+    resave: true,
+    saveUninitialized: true
+}))
+
+// Conf Flash
+ app.use(flash())
+
+//Midleaware
+app.use((req, res, next) => {
+    res.locals.success_msg = req.flash("success_msg")
+    res.locals.error_msg = req.flash("error_msg")
+    next()
+})
+
+
 //Inicialização Handlebars
-app.engine('handlebars', handlebars({defaultLayout: 'main'}))
 app.set('view engine', 'handlebars')
+app.engine('handlebars', handlebars({defaultLayout: 'main'}))
+
 
 //Conf bodyparser
 app.use(bodyparser.urlencoded({extended: true}))
@@ -28,6 +49,7 @@ mongoose.connect('mongodb://localhost/nci', {useNewUrlParser: true, useUnifiedTo
 
 // Public
 app.use(express.static(path.join(__dirname,"public")))
+
 
 //Rotas Express
 app.get('/', (req, res) => {
