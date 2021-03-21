@@ -14,7 +14,7 @@ router.get('/cadastro_alunos', (req, res) => {
 })
 
 router.get('/painel_alunos', (req, res) => {
-    Aluno.find().then((alunos) => {
+    Aluno.find().lean().then((alunos) => {
         res.render('admin/painel_alunos', {alunos: alunos})
     }).catch((err) => {
         req.flash('error_msg', 'Erro ao listar os alunos!')
