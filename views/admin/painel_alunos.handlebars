@@ -6,7 +6,9 @@
 {{#each alunos}}
     <div class="card mt-2">
         <div class="card-body">
-            <h3>{{nome}}</h3>
+            <div style="display: flex; align-items: center; justify-content: space-between;">
+                <h3>{{nome}}</h3><span>Cadastrado em: {{data_registro}}</span>
+            </div>
             <hr>
             <p>{{telefone}}</p>
             <p>{{curso}}</p>
