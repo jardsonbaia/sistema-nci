@@ -58,8 +58,11 @@ app.get('/', (req, res) => {
 app.use('/admin', admin)
 
 
+const data = new Date()
+const dataCompleta = data.getDate() + "/" + data.getMonth() + "/" + data.getFullYear()
 
 //Inicialização do Servidor
 app.listen(port, () => {
     console.log('Servidor rodando em ', port)
+    console.log(dataCompleta)
 })
