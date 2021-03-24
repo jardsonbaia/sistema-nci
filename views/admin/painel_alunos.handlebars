@@ -1,11 +1,8 @@
-<h1>Painel Alunos</h1>
-<a href="/admin/cadastro_alunos">
-    <button class="btn btn-primary">Cadastrar Aluno</button>
-</a>
+<h1 class="mt-4">Painel Alunos</h1>
 
 <main style="max-width: 600px;">
     <hr>
-    <h4 class="display-6">Todos os Alunos</h4>
+    <h6>Todos os Alunos</h6>
     {{#each alunos}}
     <div class="card mt-2">
         <div class="card-body">
@@ -25,27 +22,33 @@
             <div style="display: flex; align-items: flex-end; justify-content: space-between;">
                 <div class="fw-bold text-black-60">
                     <ul style="list-style: none; text-indent: -20px;">
-                    <li>Curso: <span class="fw-normal text-dark">{{curso}}</span></li>  
-                    <li>Telefone: <span class="fw-normal text-dark">{{telefone}}</span></li>    
-                    <li>Horário do Curso: <span class="fw-normal text-dark">{{horario_curso}}</s    pan></li>
-                    <li>Dia do Curso: <span class="fw-normal text-dark">{{dia_curso}}</span></li>   
-                    <li>Data de Nascimento: <span class="fw-normal text-dark">{{data_nascimento}}</span></li>
+                        <li>Curso: <span class="fw-normal text-dark">{{curso}}</span></li>
+                        <li>Telefone: <span class="fw-normal text-dark">{{telefone}}</span></li>
+                        <li>Horário do Curso: <span class="fw-normal text-dark">{{horario_curso}}</s pan></li>
+                        <li>Dia do Curso: <span class="fw-normal text-dark">{{dia_curso}}</span></li>
+                        <li>Data de Nascimento: <span class="fw-normal text-dark">{{data_nascimento}}</span></li>
                     </ul>
                 </div>
-                <button style="border: none; background: none;">
-                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-trash text-danger"
-                    viewBox="0 0 16 16">
-                    <path
-                        d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z" />
-                    <path fill-rule="evenodd"
-                        d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4L4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z" />
-                </svg>
-                </button>
+                <form action="/admin/painel_alunos/deletar" method="POST">
+                    <input type="hidden" name="id" value="{{_id}}">
+                    <button type="submit" style="border: none; background: none;" title="Deletar">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor"
+                            class="bi bi-trash text-danger" viewBox="0 0 16 16">
+                            <path
+                                d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z" />
+                            <path fill-rule="evenodd"
+                                d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4L4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z" />
+                        </svg>
+                    </button>
+                </form>
             </div>
         </div>
     </div>
 
     {{else}}
     {{/each}}
-
+    <br><br>
+    <a href="/admin/cadastro_alunos">
+        <button class="btn btn-primary">Cadastrar Aluno</button>
+    </a>
 </main>

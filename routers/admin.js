@@ -112,5 +112,15 @@ router.post("/painel_alunos/edit", (req, res) => {
     })
 })
 
+router.post('/painel_alunos/deletar', (req, res) => {
+    Aluno.deleteOne({_id: req.body.id}).then(() => {
+        req.flash('success_msg', 'Aluno deletado!')
+        res.redirect('/admin/painel_alunos')
+    }).catch((err) => {
+        req.flash('error_msg', 'Erro ao deletar o Aluno!')
+        res.redirect('/admin/painel_alunos')
+    })
+})
+
 
 module.exports = router
