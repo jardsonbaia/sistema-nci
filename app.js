@@ -2,10 +2,13 @@ const express = require('express')
 const handlebars = require('express-handlebars')
 const bodyparser = require('body-parser')
 const mongoose = require('mongoose')
-const admin = require ('./routers/admin')
 const path = require('path')
 const session = require('express-session')
 const flash = require('connect-flash')
+const home = require ('./routers/home')
+const admin = require ('./routers/admin')
+const cursos = require ('./routers/cursos')
+const sobre = require ('./routers/sobre')
 const port = 2222
 
 //Inicialização Express
@@ -48,15 +51,13 @@ mongoose.connect('mongodb://localhost/nci', {useNewUrlParser: true, useUnifiedTo
 })
 
 // Public
-app.use(express.static(path.join(__dirname,"public")))
-
+app.use(express.static(path.join(__dirname + "/public")))
 
 //Rotas Express
-app.get('/', (req, res) => {
-   res.render('home/index') 
-})
+app.use('/', home)
 app.use('/admin', admin)
-
+app.use('/cursos', cursos)
+app.use('/sobre', sobre)
 
 const data = new Date()
 const dataCompleta = data.getDate() + "/" + data.getMonth() + "/" + data.getFullYear()

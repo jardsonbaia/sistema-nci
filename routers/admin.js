@@ -14,12 +14,23 @@ router.get('/cadastro_alunos', (req, res) => {
 })
 
 router.get('/painel_alunos', (req, res) => {
-    Aluno.find().lean().then((alunos) => {
+    Aluno.find().lean().sort({data_nascimento:'asc'}).then((alunos) => {
         res.render('admin/painel_alunos', {alunos: alunos})
     }).catch((err) => {
         req.flash('error_msg', 'Erro ao listar os alunos!')
         res.redirect('/admin')
     })
+})
+
+// Rota para editar categoria
+router.get('/painel_alunos/edit/:id', (req, res) => {
+    Aluno.findOne({_id:req.params.id}).lean().then((aluno) => {
+        res.render("admin/edit_alunos", {aluno: aluno})
+    }).catch((err) => {
+        req.flash("error_msg", "Este aluno não esxiste")
+        res.redirect('/admin/painel_alunos')
+    })
+
 })
 
 // Rota que recebe os dados do cadastro e salva no banco
@@ -50,7 +61,7 @@ router.post('/cadastro_alunos/novo', (req, res) => {
         res.render("admin/cadastro_alunos", { erros: erros })
     } else {
 
-        // Cirando objeto com as informações da requisição POST
+        // Criando objeto com as informações da requisição POST
         const novoAluno = {
             nome: req.body.nome,
             telefone: req.body.telefone,
@@ -71,6 +82,35 @@ router.post('/cadastro_alunos/novo', (req, res) => {
     }
 
 
+})
+
+// Rota de edição de alunos
+router.post("/painel_alunos/edit", (req, res) => {
+    Aluno.findOne({_id: req.body.id}).lean().then((aluno) => {
+        
+
+        aluno.nome = req.body.nome
+        aluno.telefone = req.body.telefone
+        aluno.curso = req.body.curso
+        aluno.data_nascimento = req.body.data_nascimento
+        aluno.horario_curso = req.body.horario_curso
+        aluno.dia_curso = req.body.dia_curso
+
+        Aluno.findOneAndUpdate({_id: req.body.id, nome: "ximboca"})
+        
+        // Aluno.save().then(() => {
+        //     req.flash("success_msg", "Aluno editado com sucesso!")
+        //     res.redirect("/admin/painel_alunos")
+        // }).catch((err) => {
+        //     req.flash("error_msg", "Erro ao salvar edição do Aluno!")
+        //     req.res("/admin/painel_alunos")
+        // })
+
+    }).catch((err) => {
+        console.log(err)
+        req.flash("error_msg", "Erro ao editar o aluno!")
+        res.redirect('/admin/painel_alunos')
+    })
 })
 
 
