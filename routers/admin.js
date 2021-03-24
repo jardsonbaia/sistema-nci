@@ -5,14 +5,15 @@ const mongoose = require('mongoose')
 require('../models/AlunoSchema')
 const Aluno = mongoose.model('aluno')
 
+// Rota inicial
 router.get('/', (req, res) => {
     res.render('admin/index')
 })
-
+//Rota de cadastro
 router.get('/cadastro_alunos', (req, res) => {
     res.render('admin/cadastro_alunos')
 })
-
+//Rota de painel dos alunos
 router.get('/painel_alunos', (req, res) => {
     Aluno.find().lean().sort({data_nascimento:'asc'}).then((alunos) => {
         res.render('admin/painel_alunos', {alunos: alunos})
