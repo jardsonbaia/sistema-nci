@@ -11,6 +11,8 @@ const admin = require ('./routers/admin')
 const cursos = require ('./routers/cursos')
 const sobre = require ('./routers/sobre')
 const port = 2222
+const uri = "mongodb+srv://user-db-nci:pass-db-nci-10@cluster-nci.2fvy8.mongodb.net/dbNCI?retryWrites=true&w=majority"
+const uriLocal = "mongodb://localhost/nci"
 
 //Inicialização Express
 const app = express()
@@ -44,7 +46,7 @@ app.use(bodyparser.json())
 
 //Mongoose
 mongoose.Promise = global.Promise;
-mongoose.connect('mongodb://localhost/nci', {useNewUrlParser: true, useUnifiedTopology: true}).then( () => {
+mongoose.connect(uri, {useNewUrlParser: true, useUnifiedTopology: true}).then( () => {
     console.log('Banco Conectado')
 }
 ).catch( (err) => {
