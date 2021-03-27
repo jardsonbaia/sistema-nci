@@ -6,8 +6,7 @@
                     <div class="row">
                         <div class="col-md-4 login-sec">
                             <h2 class="text-center text-secondary mt-2">Login</h2>
-                            <br>
-                            <form class="login-form" method="POST">
+                            <form class="login-form" action="/login" method="POST">
                                 <div class="form-group mt-2">
                                     <label for="Email">Email: </label>
                                     <input type="email" class="form-control" name="email" aria-describedby="emailHelp"
@@ -15,10 +14,10 @@
                                 </div>
                                 <div class="form-group mt-2">
                                     <label for="senha">Senha:</label>
-                                    <input type="password" class="form-control" name="senha" placeholder="ex. senha"><br>
+                                    <input type="password" class="form-control" name="senha" placeholder="ex. senha" minlength="6" required>
+                                    <br>
                                 </div>
-
-                                <button type="submit" class="btn btn-primary mb-4" style="width: 100%;">Entrar</button>
+                                <button type="submit" class="btn btn-primary mb-2" style="width: 100%;">Entrar</button>
                             </form>
                         </div>
                         <div class="col-md-8 banner-sec">

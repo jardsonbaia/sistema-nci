@@ -4,17 +4,19 @@ const router = express.Router()
 const mongoose = require('mongoose')
 require('../models/AlunoSchema')
 const Aluno = mongoose.model('aluno')
+const {eAdmin} = require('../helpers/eAdmin')
+
 
 // Rota inicial
-router.get('/', (req, res) => {
+router.get('/', eAdmin, (req, res) => {
     res.render('admin/index')
 })
 //Rota de cadastro
-router.get('/cadastro_alunos', (req, res) => {
+router.get('/cadastro_alunos', eAdmin, (req, res) => {
     res.render('admin/cadastro_alunos')
 })
 //Rota de painel dos alunos
-router.get('/painel_alunos', (req, res) => {
+router.get('/painel_alunos', eAdmin, (req, res) => {
     Aluno.find().lean().sort({data_nascimento:'asc'}).then((alunos) => {
         res.render('admin/painel_alunos', {alunos: alunos})
     }).catch((err) => {
@@ -24,7 +26,7 @@ router.get('/painel_alunos', (req, res) => {
 })
 
 // Rota para editar categoria
-router.get('/painel_alunos/edit/:id', (req, res) => {
+router.get('/painel_alunos/edit/:id', eAdmin, (req, res) => {
     Aluno.findOne({_id:req.params.id}).lean().then((aluno) => {
         res.render("admin/edit_alunos", {aluno: aluno})
     }).catch((err) => {
@@ -35,7 +37,7 @@ router.get('/painel_alunos/edit/:id', (req, res) => {
 })
 
 // Rota que recebe os dados do cadastro e salva no banco
-router.post('/cadastro_alunos/novo', (req, res) => {
+router.post('/cadastro_alunos/novo', eAdmin, (req, res) => {
 
     // Validação de dados que são enviado pra rota
     let erros = []
@@ -86,7 +88,7 @@ router.post('/cadastro_alunos/novo', (req, res) => {
 })
 
 // Rota de edição de alunos
-router.post("/painel_alunos/edit", (req, res) => {
+router.post("/painel_alunos/edit", eAdmin, (req, res) => {
     Aluno.findOne({_id: req.body.id}).then((aluno) => {
         
 
@@ -112,7 +114,7 @@ router.post("/painel_alunos/edit", (req, res) => {
     })
 })
 
-router.post('/painel_alunos/deletar', (req, res) => {
+router.post('/painel_alunos/deletar', eAdmin, (req, res) => {
     Aluno.deleteOne({_id: req.body.id}).then(() => {
         req.flash('success_msg', 'Aluno deletado!')
         res.redirect('/admin/painel_alunos')
