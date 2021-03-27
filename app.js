@@ -10,6 +10,7 @@ const login = require ('./routers/login')
 const admin = require ('./routers/admin')
 const cursos = require ('./routers/cursos')
 const sobre = require ('./routers/sobre')
+const usuarios = require ('./routers/usuario')
 const port = 2222
 const uri = "mongodb+srv://user-db-nci:pass-db-nci-10@cluster-nci.2fvy8.mongodb.net/dbNCI?retryWrites=true&w=majority"
 const uriLocal = "mongodb://localhost/nci"
@@ -62,6 +63,7 @@ app.use('/admin', admin)
 app.use('/login', login)
 app.use('/cursos', cursos)
 app.use('/sobre', sobre)
+app.use('/usuarios', usuarios)
 
 const data = new Date()
 const dataCompleta = data.getDate() + "/" + data.getMonth() + "/" + data.getFullYear()

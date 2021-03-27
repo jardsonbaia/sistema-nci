@@ -27,6 +27,12 @@ const Usuario = new Schema({
         type: String,
         default: 'Hoje'
     },
+    admin: {
+        type: Number,
+        default: 0
+    }
 })
+
+
 
 mongoose.model("usuarios", Usuario)
