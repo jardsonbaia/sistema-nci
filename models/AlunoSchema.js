@@ -1,5 +1,6 @@
 const  mongoose  = require("mongoose");
 const Schema = mongoose.Schema
+
 const AlunoSchema = new Schema({
     nome: {
         type: String,
