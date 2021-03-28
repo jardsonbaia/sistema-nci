@@ -16,7 +16,6 @@ const passport = require('passport')
 require('./config/auth')(passport)
 const eAdmin = require('./helpers/eAdmin')
 
-const port = 2222
 const uri = "mongodb+srv://user-db-nci:pass-db-nci-10@cluster-nci.2fvy8.mongodb.net/dbNCI?retryWrites=true&w=majority"
 const uriLocal = "mongodb://localhost/nci"
 
@@ -80,6 +79,7 @@ const data = new Date()
 const dataCompleta = data.getDate() + "/" + data.getMonth() + "/" + data.getFullYear()
 
 //Inicialização do Servidor
+const port = process.env.PORT || 22027
 app.listen(port, () => {
     console.log('Servidor rodando em ', port)
     console.log(dataCompleta)
