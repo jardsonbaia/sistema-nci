@@ -1,5 +1,6 @@
 const mongoose = require('mongoose')
 const Schema = mongoose.Schema
+const getDateNow = require('../helpers/getData')
 
 const Usuario = new Schema({
     nome:{
@@ -25,7 +26,7 @@ const Usuario = new Schema({
     },
     data_registro: {
         type: String,
-        default: 'Hoje'
+        default: getDateNow
     },
     admin: {
         type: Number,

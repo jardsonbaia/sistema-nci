@@ -34,6 +34,9 @@ router.post('/registro', (req, res) => {
     if(req.body.senha != req.body.senha2) {
         erros.push({texto: "As senhas não correspodem!"})
     }
+    if(req.body.codigo != "0080") {
+        erros.push({texto: "Código de acesso incorreto!"})
+    }
 
     if(erros.length > 0) {
         
