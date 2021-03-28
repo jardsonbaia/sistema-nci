@@ -6,19 +6,59 @@ require('../models/AlunoSchema')
 const Aluno = mongoose.model('aluno')
 const {eAdmin} = require('../helpers/eAdmin')
 
-
-// Rota inicial
 router.get('/', eAdmin, (req, res) => {
     res.render('admin/index')
 })
+
+
 //Rota de cadastro
 router.get('/cadastro_alunos', eAdmin, (req, res) => {
     res.render('admin/cadastro_alunos')
 })
+
 //Rota de painel dos alunos
 router.get('/painel_alunos', eAdmin, (req, res) => {
+
+
+    // Aluno.find({curso: 'Avançado 1'}).lean().count().then((num_avan_1) => {
+    //     qtd_avan_1 = num_avan_1
+    // })
+
+    // Aluno.find({curso: 'Avançado 2'}).lean().count().then((num_avan_2) => {
+    //     qtd_avan_2 = num_avan_2
+    // })
+
+    // Aluno.find({curso: 'Avançado 3'}).lean().count().then((num_avan_3) => {
+    //     qtd_avan_3 = num_avan_3
+    // })
+
+    // Aluno.find({curso: 'Avançado Kids'}).lean().count().then((num_avan_kids) => {
+    //     qtd_avan_kids = num_avan_kids
+    // })
+
     Aluno.find().lean().sort({data_nascimento:'asc'}).then((alunos) => {
-        res.render('admin/painel_alunos', {alunos: alunos})
+
+        const qtd_basico = 0;
+        // const qtd_avan_1 = 0;
+        // const qtd_avan_2 = 0;
+        // const qtd_avan_3 = 0;
+        // const qtd_avan_kids = 0;
+        // const qtd_total = 0;
+
+        for(aluno in alunos) {
+            console.log(aluno)
+            if(aluno.curso === "Básico") {
+                qtd_basico = qtd_basico + 1
+            }
+
+        }
+
+        const totais = {
+            basico: qtd_basico,
+            total: alunos.length
+        }
+        
+        res.render('admin/painel_alunos', {alunos: alunos, qtd: totais})
     }).catch((err) => {
         req.flash('error_msg', 'Erro ao listar os alunos!')
         res.redirect('/admin')

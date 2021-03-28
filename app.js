@@ -75,12 +75,8 @@ app.use('/cursos', cursos)
 app.use('/sobre', sobre)
 app.use('/usuarios', usuarios)
 
-const data = new Date()
-const dataCompleta = data.getDate() + "/" + data.getMonth() + "/" + data.getFullYear()
-
 //Inicialização do Servidor
 const port = process.env.PORT || 22027
 app.listen(port, () => {
     console.log('Servidor rodando em ', port)
-    console.log(dataCompleta)
 })

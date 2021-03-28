@@ -1,5 +1,6 @@
 const  mongoose  = require("mongoose");
 const Schema = mongoose.Schema
+const getDateNow = require('../helpers/getData')
 
 const AlunoSchema = new Schema({
     nome: {
@@ -28,7 +29,7 @@ const AlunoSchema = new Schema({
     },
     data_registro: {
         type: String,
-        default: 'Hoje'
+        default: getDateNow
     },
     data_alteracao: {
         type: Date,

@@ -5,6 +5,10 @@ router.get('/', (req, res) => {
     res.render("cursos/index")
 })
 
+router.get('/basico/', (req, res) => {
+    res.render("cursos/basico")
+})
+
 router.get('/avancado1/', (req, res) => {
     res.render("cursos/avancado1")
 })
