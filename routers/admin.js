@@ -38,23 +38,36 @@ router.get('/painel_alunos', eAdmin, (req, res) => {
 
     Aluno.find().lean().sort({data_nascimento:'asc'}).then((alunos) => {
 
-        const qtd_basico = 0;
-        // const qtd_avan_1 = 0;
-        // const qtd_avan_2 = 0;
-        // const qtd_avan_3 = 0;
-        // const qtd_avan_kids = 0;
-        // const qtd_total = 0;
+        let qtd_basico = 0;
+        let qtd_avan_1 = 0;
+        let qtd_avan_2 = 0;
+        let qtd_avan_3 = 0;
+        let qtd_avan_kids = 0;
 
-        for(aluno in alunos) {
-            console.log(aluno)
-            if(aluno.curso === "Básico") {
-                qtd_basico = qtd_basico + 1
+        alunos.forEach((aluno) => {
+            if(aluno.curso == "Básico") {
+                qtd_basico ++
             }
-
-        }
+            if(aluno.curso == "Avançado 1") {
+                qtd_avan_1 ++
+            }
+            if(aluno.curso == "Avançado 2") {
+                qtd_avan_2 ++
+            }
+            if(aluno.curso == "Avançado 3") {
+                qtd_avan_3 ++
+            }
+            if(aluno.curso == "Avançado Kids") {
+                qtd_avan_kids ++
+            }
+        })
 
         const totais = {
             basico: qtd_basico,
+            avan_1: qtd_avan_1,
+            avan_2: qtd_avan_2,
+            avan_3: qtd_avan_3,
+            avan_kids: qtd_avan_kids,
             total: alunos.length
         }
         
