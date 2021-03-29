@@ -5,6 +5,7 @@ const mongoose = require('mongoose')
 require('../models/AlunoSchema')
 const Aluno = mongoose.model('aluno')
 const {eAdmin} = require('../helpers/eAdmin')
+const {formatDate} = require('../helpers/formatDate')
 
 router.get('/', eAdmin, (req, res) => {
     res.render('admin/index')
@@ -18,23 +19,6 @@ router.get('/cadastro_alunos', eAdmin, (req, res) => {
 
 //Rota de painel dos alunos
 router.get('/painel_alunos', eAdmin, (req, res) => {
-
-
-    // Aluno.find({curso: 'Avançado 1'}).lean().count().then((num_avan_1) => {
-    //     qtd_avan_1 = num_avan_1
-    // })
-
-    // Aluno.find({curso: 'Avançado 2'}).lean().count().then((num_avan_2) => {
-    //     qtd_avan_2 = num_avan_2
-    // })
-
-    // Aluno.find({curso: 'Avançado 3'}).lean().count().then((num_avan_3) => {
-    //     qtd_avan_3 = num_avan_3
-    // })
-
-    // Aluno.find({curso: 'Avançado Kids'}).lean().count().then((num_avan_kids) => {
-    //     qtd_avan_kids = num_avan_kids
-    // })
 
     Aluno.find().lean().sort({data_nascimento:'asc'}).then((alunos) => {
 
@@ -78,7 +62,7 @@ router.get('/painel_alunos', eAdmin, (req, res) => {
     })
 })
 
-// Rota para editar categoria
+// Rota para editar aluno
 router.get('/painel_alunos/edit/:id', eAdmin, (req, res) => {
     Aluno.findOne({_id:req.params.id}).lean().then((aluno) => {
         res.render("admin/edit_alunos", {aluno: aluno})
@@ -122,7 +106,7 @@ router.post('/cadastro_alunos/novo', eAdmin, (req, res) => {
             nome: req.body.nome,
             telefone: req.body.telefone,
             curso: req.body.curso,
-            data_nascimento: req.body.data_nascimento,
+            data_nascimento: formatDate(req.body.data_nascimento),
             horario_curso: req.body.horario_curso,
             dia_curso: req.body.dia_curso
         }

@@ -2,6 +2,7 @@ const express = require('express')
 const router = express.Router()
 const mongoose = require('mongoose')
 const bcrypt = require('bcryptjs')
+const {formatDate} = require('../helpers/formatDate')
 
 require("../models/UsuarioSchema")
 const Usuario = mongoose.model("usuarios")
@@ -54,7 +55,7 @@ router.post('/registro', (req, res) => {
                     email: req.body.email,
                     senha: req.body.senha,
                     cargo: req.body.cargo,
-                    data_nascimento: req.body.data_nascimento,
+                    data_nascimento: formatDate(req.body.data_nascimento),
                     admin: 1
                 })
 
