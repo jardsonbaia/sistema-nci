@@ -3,9 +3,9 @@
 {{else}}
 
 {{/each}}
-<div class="card">
+<div class="card" style="width: 90vw; min-width: 300px; max-width: 800px; margin-top: 10%;">
     <div class="card-body">
-        <h3>Editar Aluno: {{aluno.nome}}</h3>
+        <h3>Editar Aluno: <span style="color: gray;">{{aluno.nome}}</span></h3>
         <br>
         <form class='' action="/admin/painel_alunos/edit" method="POST" style="padding: 10px;">
         <input type="hidden" name="id" value="{{aluno._id}}">
