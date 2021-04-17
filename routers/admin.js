@@ -87,9 +87,6 @@ router.post('/cadastro_alunos/novo', eAdmin, (req, res) => {
     if (!req.body.curso || typeof req.body.curso == undefined || req.body.curso == null) {
         erros.push({ texto: "Curso inválido" })
     }
-    if (!req.body.curso || typeof req.body.data_nascimento == undefined || req.body.data_nascimento == null || req.body.data_nascimento.length !== 10) {
-        erros.push({ texto: "Data de nascimento inválida" })
-    }
     if (!req.body.horario_curso || typeof req.body.horario_curso == undefined || req.body.horario_curso == null) {
         erros.push({ texto: "Horário do curso inválido" })
     }
