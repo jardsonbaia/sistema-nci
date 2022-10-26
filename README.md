@@ -1,5 +1,5 @@
 # Sistema NCI
-CRUD de Gerenciamento de Alunos
+CRUD de Gerenciamento de Alunos (Projeto Fictício para Faculdade)
 
 Hospedado em: Heroku e MongoDB Atlas
 
